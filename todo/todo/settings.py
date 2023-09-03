@@ -21,9 +21,9 @@ SECRET_KEY = os.getenv('SECRET_KEY', default='default_secret_key')
 DEBUG = bool(strtobool(os.getenv('DEBUG', 'True')))
 
 ALLOWED_HOSTS = [
-    os.getenv('HOST'),
     '127.0.0.1',
     'web',
+    os.getenv('HOST'),
 ]
 
 

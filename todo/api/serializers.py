@@ -1,3 +1,7 @@
+from datetime import date
+
+from django.core.validators import MinValueValidator
+from django.utils import timezone
 from rest_framework import serializers
 
 from main.models import Category, Task
@@ -29,6 +33,7 @@ class TaskReadSerializer(serializers.ModelSerializer):
             'created_at',
             'due_date',
             'category',
+            'file',
         )
 
     def get_file(self, obj):
@@ -47,6 +52,12 @@ class TaskCreateSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(
         default=serializers.CurrentUserDefault(),
     )
+    due_date = serializers.DateField(
+        validators=[MinValueValidator(
+            limit_value=date.today(),
+            message='Дата окончания задачи не может быть меньше текущей.'
+        )]
+    )
 
     class Meta:
         model = Task
@@ -60,4 +71,4 @@ class TaskCreateSerializer(serializers.ModelSerializer):
         )
 
     def to_representation(self, instance):
-        return TaskReadSerializer(instance).data
+        return TaskReadSerializer(instance, context=self.context).data

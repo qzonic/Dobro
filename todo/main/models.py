@@ -36,9 +36,18 @@ class Task(models.Model):
     )
     category = models.ForeignKey(
         to=Category,
-        default='Main',
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
         related_name='tasks',
+    )
+    user = models.ForeignKey(
+        to=User,
+        on_delete=models.CASCADE,
+        related_name='tasks',
+    )
+    file = models.FileField(
+        upload_to='tasks/',
+        blank=True,
+        null=True,
     )
 
     class Meta:

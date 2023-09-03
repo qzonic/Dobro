@@ -32,6 +32,7 @@ class TaskAdmin(admin.ModelAdmin):
         'created_at',
         'due_date',
         'category',
+        'user',
     )
     list_editable = (
         'title',
@@ -44,6 +45,7 @@ class TaskAdmin(admin.ModelAdmin):
     search_fields = (
         'title',
         'category__name',
+        'user__username',
     )
 
 

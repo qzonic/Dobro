@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'djoser',
+    'django_filter',
     'rest_framework',
     'main',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -108,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'api.permissions.IsOwnerOrReadOnly',
+        'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',

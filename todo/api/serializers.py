@@ -1,7 +1,6 @@
 from datetime import date
 
 from django.core.validators import MinValueValidator
-from django.utils import timezone
 from rest_framework import serializers
 
 from main.models import Category, Task

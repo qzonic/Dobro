@@ -81,3 +81,15 @@ class TestCategory(APITestCase):
             response = met(self.URL + str(self.first_category) + '/')
 
             self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_search_category(self):
+        param = 'Первая'
+        expected_count = 1
+        response = self.authorized_client.get(self.URL + f'?search={param}')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.json()['count'], expected_count)
+        self.assertEqual(
+            response.json()['results'][0]['name'],
+            self.first_category.name
+        )

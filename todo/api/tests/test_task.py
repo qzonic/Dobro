@@ -185,3 +185,15 @@ class TestTask(APITestCase):
             self.assertEqual(response.status_code, status.HTTP_201_CREATED)
             self.assertTrue(task.exists())
             self.assertTrue(task.first().file)
+
+    def test_filter_task(self):
+        param = 'Первая категория'
+        expected_count = 1
+        response = self.authorized_client.get(self.URL + f'?category={param}')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.json()['count'], expected_count)
+        self.assertEqual(
+            response.json()['results'][0]['title'],
+            self.first_task.title
+        )

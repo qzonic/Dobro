@@ -32,7 +32,7 @@ jobs:
     - name: Test with django tests
       run: |
         # перейти в папку, содержащую manage.py — 
-        cd phonebook/
+        cd todo/
         # запустить написанные разработчиком тесты
         python manage.py test
 
